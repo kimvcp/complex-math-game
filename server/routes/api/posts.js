@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongodb = require('mongodb');
 
@@ -33,13 +34,13 @@ router.delete('/:id', async (req , res) => {
 
 async function loadPostCollection() {
   const client = await mongodb.MongoClient.connect(
-    'mongodb+srv://bank:1234@bankcluster-ik5dr.mongodb.net/test?retryWrites=true',
+    'mongodb+srv://'+process.env.DB_USER+':'+process.env.DB_PASS+process.env.DB_URL,
     {
       useNewUrlParser: true
     }
   );
 
-  return client.db('bank_db').collection('posts');
+  return client.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION);
 }
 
 module.exports = router;
