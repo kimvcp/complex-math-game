@@ -8,4 +8,4 @@ A very simple complex math game. ....
 | -------- | ---------------------- | --------- |
 | bankeez  | Piyawat Setthitikun    | Developer |
 | kimvcp   | Vichaphol Thamsuthikul | Developer |
-| jampttws | Tanasorn Chinese       | Developer |
+| jampttws | Tanasorn Tritawisup    | Developer |
