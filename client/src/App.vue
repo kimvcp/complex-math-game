@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <PostComponent />
+      <Header />
+      <router-view />
   </div>
 </template>
 
 <script>
-import PostComponent from './components/PostComponent.vue'
-
+import Header from './components/layout/Header';
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    PostComponent
-  }
+    Header,
+  }  
 }
 </script>
+
 
 <style>
 #app {
@@ -24,5 +24,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
 }
 </style>
