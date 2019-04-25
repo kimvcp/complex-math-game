@@ -20,7 +20,7 @@ export default {
         background:blue;
         color: #fff;
         text-align: center;
-        padding: 10px
+        padding: 20px
     }
     .header a {
         color: #fff;
