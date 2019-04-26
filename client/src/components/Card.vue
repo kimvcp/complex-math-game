@@ -1,15 +1,20 @@
 <template>
-    <b-button href="http://localhost:8080/#/game" variant="light">   
-        <b-card-text>
-            {{card}}
-        </b-card-text>
-    </b-button>
+    <b-button variant="light" v-bind:game="game" to="game">   
+        <span style="margin-right: 80px">Multiplication Table: {{card}}</span>
+        <span>High Score: {{highScore}}</span>
+    </b-button> 
 </template>
 
 <script>
 export default {
     name: "Card",
-    props: ["card"],
+    props: ['card', 'highScore'],
+    data() {
+      return {
+        
+      }
+    },
+
 }
 </script>
 

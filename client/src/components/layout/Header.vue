@@ -1,9 +1,8 @@
 <template>
     <header class="header">
-        <h1>Complex Math Game</h1>
         <div id="nav">
-            <router-link to="/">Math Table</router-link> |
-            <router-link to="/game">Game</router-link> |
+            <router-link to="/"><h1>Complex Math Game</h1></router-link> 
+            <router-link to="/game">Game</router-link>| 
             <router-link to="/score">Score</router-link>
         </div>
     </header>
@@ -17,7 +16,7 @@ export default {
 
 <style scoped>
     .header{
-        background:blue;
+        background:skyblue;
         color: #fff;
         text-align: center;
         padding: 20px

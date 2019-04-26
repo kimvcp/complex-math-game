@@ -1,23 +1,36 @@
 <template>
   <div>
-    <TableCards v-bind:tableCards="tableCards" />
+    <p class="error" v-if="error">{{error}}</p>
+    <div>
+      <div
+        class="card"
+        v-for=" card in tableCards"
+        v-bind:key="card"
+      > 
+        <Card 
+          v-bind:card="card"
+          v-bind:highScore="highScore" />
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
-import TableCards from '../components/TableCards';
+import Card from '../components/Card';
 import PostService from "../PostService";
 
 export default {
   name: 'Home',
   components: {
-    TableCards
+    Card
   },
     data() {
       return {
-        tableCards: [1, 2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10 ,11 ,12],
+        tableCards: [ 2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10 ,11 ,12],
+        highScore: "999",
         questions: [],
-        error: "",
+        err: "",
       }
     },
     async created() {
@@ -30,3 +43,9 @@ export default {
     }
   
 </script>
+
+<style scoped>
+.card {
+  margin: 20px;
+}
+</style>
