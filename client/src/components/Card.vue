@@ -1,7 +1,7 @@
 <template>
     <b-button variant="light" v-bind:game="game" to="game">   
-        <span style="margin-right: 80px">Multiplication Table: {{card}}</span>
-        <span>High Score: {{highScore}}</span>
+        <span style="margin-right: 80px">Multiplication Table: {{card._id}}</span>
+        <span>High Score: {{card.text}}</span>
     </b-button> 
 </template>
 
@@ -11,8 +11,7 @@ export default {
     props: ['card', 'highScore'],
     data() {
       return {
-        
-      }
+      } 
     },
 
 }

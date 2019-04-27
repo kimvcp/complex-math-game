@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="error" v-if="error">{{error}}</p>
+    <p class="error" v-if="err"> {{err}} </p>
     <div>
       <div
         class="card"
@@ -27,15 +27,15 @@ export default {
   },
     data() {
       return {
-        tableCards: [ 2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10 ,11 ,12],
-        highScore: "999",
-        questions: [],
+        tableCards: [],
+        highScore: "",
+        questions: [ 2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10 ,11 ,12],
         err: "",
       }
     },
     async created() {
       try {
-        this.questions = await PostService.getPosts();
+        this.tableCards = await PostService.getPosts();
       } catch (err) {
         this.err = err.message;
       }
