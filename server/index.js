@@ -12,7 +12,7 @@ const posts = require('./routes/api/posts')
 const game = require('./routes/backend/game')
 
 app.use('/api/posts',posts)
-app.use('/backend', game);
+app.use('/backend', game)
 
 //Handle production
 if(process.env.NODE_ENV === 'production'){

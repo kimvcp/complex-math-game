@@ -26,7 +26,7 @@ export default {
   components: {
     Card
   },
-    // attributes used only in this class
+    //attributes of the class
     data() {
       return {
         number: [ 1, 2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10 ,11 ,12],

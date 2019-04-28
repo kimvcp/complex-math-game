@@ -13,10 +13,13 @@
 <script>
 export default {
     name: "Card",
+
+    // props pass by the parent 
     props: {
         highScore: Object,
         number: Object
     },
+    // attribute of the class
     data() {
       return {
         cardNumber: this.number,

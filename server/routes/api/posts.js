@@ -4,35 +4,34 @@ const mongodb = require('mongodb');
 
 const router = express.Router();
 
-//Get Posts
 
-//refernce to ./routes/api/posts
+
+//localhost:5000/api/posts/
 router.get('/', async (req, res) => {
-  const posts = await loadPostCollection();
+  const posts = await loadHighScore();
   res.send(await posts.find({}).toArray());
 });
 
-//Add Post
 
-router.post('/',async (req , res) => {
-    const posts = await loadPostCollection();
-    await posts.insertOne({
-        text: req.body.text,
-        createdAt: new Date()
-    });
-    res.status(201).send();
+//localhost:5000/api/posts/end/:id/:hishscore
+router.get('/end/:id/:highscore', async (req, res) => {
+  const db = await loadHighScore();
+  var data = (await db.find({"number": parseInt(req.params.id)}).toArray());
+
+  if(parseInt(req.params.highscore) > data[0]['highscore']){
+
+    res.send(await db.updateOne(
+      { number: parseInt(req.params.id) },
+      { 
+         $set: {highscore: parseInt(req.params.highscore)}
+      }
+    ))
+  } else res.send(data);
+
 });
 
-// Delete Post
 
-router.delete('/:id', async (req , res) => {
-    const posts = await loadPostCollection();
-    await posts.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
-
-    res.status(200).send();
-});
-
-async function loadPostCollection() {
+async function loadHighScore() {
   const client = await mongodb.MongoClient.connect(
     'mongodb+srv://jamp:1234@expresscluster-ndwly.mongodb.net/test?retryWrites=true',
     {
@@ -40,7 +39,7 @@ async function loadPostCollection() {
     }
   );
 
-  return client.db('jamp').collection('expresscluster');
+  return client.db('express').collection('highscore');
 }
 
 module.exports = router;

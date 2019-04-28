@@ -10,6 +10,7 @@
         v-bind:currentQuestion="questions[index]"
         v-bind:next="next"
         v-bind:increment="increment"
+        
       />
   </div>
 </template>
@@ -25,9 +26,11 @@ export default {
       QuestionBox,
       GameHeader
     },
+    // props pass by the parent
     props: [
       "cardNumber"
     ],
+    //attributes of the class
     data(){
       return{
         questions: [],
@@ -54,7 +57,7 @@ export default {
       },
     },
 
-    // get the api 
+    // get the api at the time page start
     async created() {
       try {
         this.questions = await PostService.getMultiplication(this.cardNumber);

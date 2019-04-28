@@ -2,7 +2,6 @@
     <div class="QuestionBox-container">
     <b-jumbotron>
         <h2>{{currentQuestion.question}}</h2><br><br>
-
         <b-list-group>
             <b-list-group-item 
             v-for="(answer,index) in shuffledAnswers" :key="index"
@@ -29,7 +28,7 @@ export default {
         next: Function,
         increment: Function,
     },
-    //attributes used only in this class
+    //attributes of the class
     data(){
         return{
             selectedIndex: null,

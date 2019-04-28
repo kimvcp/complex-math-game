@@ -17,11 +17,13 @@ export default {
     components: {
         Timer
     },
+    // props pass by the parent
      props: [   
         'numCorrect',
         'numIncorrect',
         'numTotal'
         ],
+    // attributes of the class
     data() {
     return {
       timerState: "stopped",
@@ -33,27 +35,32 @@ export default {
     };
   },
   methods: {
+
+    // start the timer
     start() {
       if (this.timerState !== "running") {
         this.tick();
         this.timerState = "running";
       }
     },
+    // mark the current
     lap() {
       this.laps.push({
         seconds: this.currentTimer,
       })
-      console.log(this.latestLap);
     },
+    // pause the timer
     pause() {
       window.clearInterval(this.ticker);
       this.timerState = "paused";
     },
+    // stop the timer
     stop() {
       window.clearInterval(this.ticker);
       this.currentTimer = 60;
       this.timerState = "stopped";
     },
+    // count down till timer stops
     tick() {
         this.ticker = setInterval(() => {
         this.currentTimer--;
@@ -64,6 +71,7 @@ export default {
       }, 50);
     },
   },
+  // called at the time the page create
   created() {
     this.start()
   },   
