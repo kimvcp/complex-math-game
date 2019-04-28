@@ -8,14 +8,6 @@ class Play{
         this.player = player;
     }
 
-    highScore(highScore){
-        var score = this.player.getScore();
-        if(score > highScore){
-           highScore = score;
-        }
-        return highScore;
-    }
-
     sent(){
         var snt = '';
 

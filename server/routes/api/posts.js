@@ -2,41 +2,33 @@ require('dotenv').config();
 const express = require('express');
 const mongodb = require('mongodb');
 
-const play = require('../backend/play.js')
 const router = express.Router();
 
 
-var data, ant;
 
-//Get Posts
-
-//refernce to ./routes/api/posts
+//localhost:5000/api/posts/
 router.get('/', async (req, res) => {
   const posts = await loadHighScore();
   res.send(await posts.find({}).toArray());
 });
 
-//refernce to ./routes/api/posts
+
+//localhost:5000/api/posts/end/:id/:hishscore
 router.get('/end/:id/:highscore', async (req, res) => {
   const db = await loadHighScore();
-  data = (await db.find({"number": parseInt(req.params.id)}).toArray());
-  console.log(data);
-  console.log(req.params.highscore);
-  console.log(data[0]['highscore']);
+  var data = (await db.find({"number": parseInt(req.params.id)}).toArray());
 
   if(parseInt(req.params.highscore) > data[0]['highscore']){
-    res.send("updated");
-    await db.updateOne(
+
+    res.send(await db.updateOne(
       { number: parseInt(req.params.id) },
       { 
          $set: {highscore: parseInt(req.params.highscore)}
       }
-    )
-  } else res.send("nothing");
+    ))
+  } else res.send(data);
 
 });
-
-
 
 
 async function loadHighScore() {
