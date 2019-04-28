@@ -1,32 +1,18 @@
 <template>
     <div class="QuestionBox-container">
     <b-jumbotron>
-        <template slot="lead">{{currentQuestion.question}}</template>
-        <hr class="my-4">
+        <h2>{{currentQuestion.question}}</h2><br><br>
 
         <b-list-group>
             <b-list-group-item 
             v-for="(answer,index) in shuffledAnswers" :key="index"
             @click.prevent="selectedAnswer(index)"            
-            :class="answerClass(index)
-            ">
+            @click="submitAnswer" 
+            >
             {{answer}}
             </b-list-group-item>
         </b-list-group>
         <br>
-
-        <b-button 
-            @click="submitAnswer" 
-            variant="primary"
-            v-bind:disabled="selectedIndex === null || answered"
-        >
-            Submit
-        </b-button>
-        <b-button 
-            @click="next" 
-            variant="success">
-            Next
-        </b-button>
     </b-jumbotron>
     </div>
 </template>
@@ -44,7 +30,7 @@ export default {
         increment: Function,
     },
     //attributes used only in this class
-    data: function(){
+    data(){
         return{
             selectedIndex: null,
             correctIndex: null,
@@ -90,46 +76,23 @@ export default {
             }
             this.answered = true;
             this.increment(isCorrect);
+            this.next();
         },
-        answerClass(index){
-            let answerClass = '';
-            if(!this.answered && this.selectedIndex === index){
-                answerClass = 'selected';
-            }else if( this.answered && this.correctIndex === index){
-                answerClass = 'correct';
-            }else if( this.answered && this.selectedIndex === index && this.correctIndex !== index)
-                answerClass = 'incorrect';
-
-            return answerClass
-        },
-
     }
 }
 </script>
 
 <style scoped>
 
-.list-group{
-    margin-bottom: 10px
-}
 .list-group-item:hover{
     background: #EEE;
     cursor: pointer;
 }
 .btn{
-    margin: 0 5px
+    margin: 20px 20px
 }
 .jumbotron{
     background: white;
-}
-.selected{
-    background-color: lightblue;
-}
-.correct{
-    background-color: lightgreen;
-}
-.incorrect{
-    background-color: lightcoral;
 }
 </style>
 

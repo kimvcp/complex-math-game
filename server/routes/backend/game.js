@@ -5,14 +5,14 @@ var player = require('./player.js');
 var play = require('./play.js');
 
 
-router.get('/', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
   var body = req.body;
 
   console.log(body)
 
-  var pl = new player(body.name, body.score);
+  var pl = new player("j", "20");
   console.log(pl)
-  var game = new play(body.status, body.number, pl);
+  var game = new play("playing",req.params.id, pl);
   res.send(game.sent());
 });
 

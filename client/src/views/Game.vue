@@ -2,6 +2,7 @@
   <div class= "quetion-container">
       <GameHeader 
       v-bind:numCorrect="numCorrect"
+      v-bind:numIncorrect="numIncorrect"
       v-bind:numTotal="numTotal"
       />
       <QuestionBox
@@ -10,23 +11,29 @@
         v-bind:next="next"
         v-bind:increment="increment"
       />
-
   </div>
 </template>
 <script>
+
 import GameHeader from "../components/layout/GameHeader"
 import QuestionBox from "../components/QuestionBox"
+import PostService from "../PostService";
+
 export default {
     name: "Game",
     components: {
       QuestionBox,
       GameHeader
     },
+    props: [
+      "cardNumber"
+    ],
     data(){
       return{
         questions: [],
         index: 0,
         numCorrect: 0,
+        numIncorrect: 0,
         numTotal: 0,
       }
     },
@@ -40,20 +47,20 @@ export default {
         if(isCorrect){
           this.numCorrect++;
         }
+        else{
+          this.numIncorrect++;
+        }
         this.numTotal++;
       },
     },
-    // fetch the api at the beginning 
-    mounted: function(){
-      fetch('https://opentdb.com/api.php?amount=10&category=15&difficulty=medium&type=multiple',{
-        method : 'get'
-      })
-      .then( (response) => {
-        return response.json();
-      })
-      .then( (jsonData) => {
-        this.questions = jsonData.results
-      })
+
+    // get the api 
+    async created() {
+      try {
+        this.questions = await PostService.getMultiplication(this.cardNumber);
+      } catch (err) {
+        this.err = err.message;
+      }
     },
 
 }

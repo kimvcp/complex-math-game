@@ -2,8 +2,6 @@
     <header class="header">
         <div id="nav">
             <router-link to="/"><h1>Complex Math Game</h1></router-link> 
-            <router-link to="/game">Game</router-link>| 
-            <router-link to="/score">Score</router-link>
         </div>
     </header>
 </template>
@@ -19,9 +17,9 @@ export default {
         background: #3862e0;
         color: #fff;
         text-align: center;
-        padding: 20px
+        padding: 10px
     }
-    .header a {
+    .header a{
         color: #fff;
         padding-right: 5px;
         text-decoration: none;

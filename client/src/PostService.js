@@ -1,18 +1,19 @@
 import axios from 'axios';
+import lodash from 'lodash'
 
-const url = 'api/posts/';
+const backUrl = 'backend/';
 
 class PostService{
     //Get Posts
-    static getPosts(){
+    static getMultiplication(index){
         return new Promise(async (resolve,reject) => {
             try{
-                const res = await axios.get(url);
-                const data = res.data;
+                const res = await axios.get(backUrl + index + '/');
+                const data = lodash.shuffle(res.data);
                 resolve(
-                    data.map(post => ({
-                        ...post,
-                        createdAt: new Date(post.createAt)
+                    data.map(element => ({
+                        ...element,
+                        createdAt: new Date(element.createAt)
                     }))
                 );
             }catch(err){
@@ -20,19 +21,6 @@ class PostService{
             }
         });
     }
-
-    //Create Posts
-    static insertPost(text){
-        return axios.post(url,{
-            text
-        });
-    }
-
-    //Delete Post
-    static deletePost(id){
-        return axios.delete(`${url}${id}`);
-    }
-
 }
 
 export default PostService;

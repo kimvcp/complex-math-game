@@ -4,12 +4,14 @@
     <div>
       <div
         class="card"
-        v-for=" card in tableCards"
-        v-bind:key="card"
+        v-for=" (card,index) in number"
+          v-bind:key="index"
       > 
-        <Card 
-          v-bind:card="card"
-          v-bind:highScore="highScore" />
+          <Card 
+            v-bind:number="number[index]"
+            v-bind:card="card"
+            v-bind:highScore="highScore"
+          />
       </div>
     </div>
 
@@ -18,26 +20,19 @@
 
 <script>
 import Card from '../components/Card';
-import PostService from "../PostService";
 
 export default {
   name: 'Home',
   components: {
     Card
   },
+    // attributes used only in this class
     data() {
       return {
-        tableCards: [],
-        highScore: "",
-        questions: [ 2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10 ,11 ,12],
+        number: [ 1, 2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10 ,11 ,12],
+        score: "",
+        status:"",
         err: "",
-      }
-    },
-    async created() {
-      try {
-        this.tableCards = await PostService.getPosts();
-      } catch (err) {
-        this.err = err.message;
       }
     },
     }
