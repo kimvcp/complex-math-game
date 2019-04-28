@@ -34,13 +34,13 @@ router.delete('/:id', async (req , res) => {
 
 async function loadPostCollection() {
   const client = await mongodb.MongoClient.connect(
-    'mongodb+srv://'+process.env.DB_USER+':'+process.env.DB_PASS+process.env.DB_URL,
+    'mongodb+srv://jamp:1234@expresscluster-ndwly.mongodb.net/test?retryWrites=true',
     {
       useNewUrlParser: true
     }
   );
 
-  return client.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION);
+  return client.db('jamp').collection('expresscluster');
 }
 
 module.exports = router;

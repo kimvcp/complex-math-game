@@ -48,10 +48,14 @@ class QuestionList{
         for(var i = 1; i <= 12; i++){
             var q  = new Question(this.number, i);
 
+            var in1 = Math.floor(Math.random() * 2 + q.answer()-2)
+            var in2 = Math.floor(Math.random() * 2 + q.answer()+2)
+            var in3 = Math.floor(Math.random() * 2 + q.answer()+4)
+
             var obj = { 
                        "question":`${q.getQuestion()}`, 
-                       "answer":`${q.answer()}`, 
-                       "choice":[`${q.answer()-2}`, `${q.answer()}`, `${q.answer()+2}`, `${q.answer()+4}`]
+                       "correct_answer":`${q.answer()}`, 
+                       "incorrect_answers":[`${in1}`, `${in2}`, `${in3}`]
                       };
             list.push(obj);
         }
