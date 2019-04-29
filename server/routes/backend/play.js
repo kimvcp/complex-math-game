@@ -9,22 +9,11 @@ class Play{
     }
 
     sent(){
-        var snt = '';
 
         var QuestionList = require('./question.js');
         var ques = new QuestionList(this.number);
         
-        if(this.status == "end"){
-           snt = {
-               "number": this.number,
-               "high score": this.highScore(),
-               "name": this.player.getName()
-           }
-        } else if(this.status == "playing"){
-            snt = ques.getList();
-            console.log(snt);
-        }
-        return snt;
+        return ques.getList();
     }
 }
 
