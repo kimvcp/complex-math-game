@@ -10,7 +10,6 @@
         v-bind:currentQuestion="questions[index]"
         v-bind:next="next"
         v-bind:increment="increment"
-        
       />
   </div>
 </template>
@@ -28,7 +27,7 @@ export default {
     },
     // props pass by the parent
     props: [
-      "cardNumber"
+      "tableNumbers",
     ],
     //attributes of the class
     data(){
@@ -60,7 +59,7 @@ export default {
     // get the api at the time page start
     async created() {
       try {
-        this.questions = await PostService.getMultiplication(this.cardNumber);
+        this.questions = await PostService.getMultiplication(this.tableNumbers);
       } catch (err) {
         this.err = err.message;
       }

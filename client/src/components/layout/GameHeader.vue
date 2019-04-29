@@ -1,12 +1,17 @@
 <template>
     <div class="gameHeader" >
-        <Timer
+        <Timer 
             :timer="currentTimer"
             :state="timerState"
         />
-        <h5>Correct : {{ numCorrect }}</h5>
-        <h5>Incorrect : {{numIncorrect}}</h5>
-        <h5>Total : {{numTotal}}</h5>
+        <b-modal ref="my-modal" hide-footer centered title="You have run out of time!">
+          <div class="d-block text-center">
+            <h4 style="color: green">Correct : {{ numCorrect }}</h4>
+            <h4 style="color: red">Incorrect : {{numIncorrect}}</h4>
+            <h4 style="color: blue">Total : {{numTotal}}</h4>
+          </div>
+          <b-button class="mt-3" variant="default" block @click="goHome">Go back</b-button>
+        </b-modal>
     </div>
 </template>
 
@@ -31,7 +36,7 @@ export default {
       ticker: undefined,
       laps: [],
       latestLap: "",
-      snackbar: false
+      snackbar: false,
     };
   },
   methods: {
@@ -66,15 +71,24 @@ export default {
         this.currentTimer--;
           if(this.currentTimer === 0){
             this.stop()
-            alert()
+            this.toggleModal()
       }
-      }, 50);
+      }, 1000);
+    }, 
+    // Country roads take me home.. to the place I belong
+    goHome() {
+      this.$router.push('/') 
     },
+    // We pass the ID of the button that we want to return focus to
+    // when the modal has hidden
+    toggleModal() {
+      this.$refs['my-modal'].toggle('#toggle-btn')
+    }
   },
-  // called at the time the page create
+  // called at the time the page created
   created() {
     this.start()
-  },   
+  },
 };
 
 </script>

@@ -5,12 +5,12 @@ var player = require('./player.js');
 var play = require('./play.js');
 
 //localhost:5000/playing/:id/:highscore/
- router.get('/playing/:id/:highscore/', function(req, res, next) {
+ router.get('/:text/:id/', function(req, res, next) {
   var body = req.body;
 
   console.log(body)
 
-  var pl = new player("user", req.params.highscore);
+  var pl = new player("user", 0);
   console.log(pl)
   var game = new play("playing", req.params.id, pl);
   res.send(game.sent());

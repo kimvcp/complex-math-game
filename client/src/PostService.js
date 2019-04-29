@@ -1,21 +1,20 @@
 import axios from 'axios';
 import lodash from 'lodash'
 
-const backUrl = 'backend/';
-const highScoreUrl = 'api/posts/end/:id/:hishscore'
+const multUrl = 'backend/'
+const highScoreUrl = 'api/posts/'
 
 class PostService{
 
-    //Get question according to the index
+    // get question according to the index
     static getMultiplication(index){
         return new Promise(async (resolve,reject) => {
             try{
-                const res = await axios.get(backUrl + index + '/');
+                const res = await axios.get( multUrl + "playing/" + index +"/");
                 const data = lodash.shuffle(res.data);
                 resolve(
                     data.map(element => ({
                         ...element,
-                        createdAt: new Date(element.createAt)
                     }))
                 );
             }catch(err){
@@ -23,15 +22,15 @@ class PostService{
             }
         });
     }
-    static getAllHighScore(index){
+    // get all the highscore in each table
+    static getAllHighScore(){
         return new Promise(async (resolve,reject) => {
             try{
-                const res = await axios.get(highScoreUrl + index);
+                const res = await axios.get(highScoreUrl);
                 const data = res.data
                 resolve(
                     data.map(element => ({
                         ...element,
-                        createdAt: new Date(element.createAt)
                     }))
                 );
             }catch(err){

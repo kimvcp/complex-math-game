@@ -25,6 +25,12 @@ export default new Router({
       props: true
     },
     {
+      path: '/game/:tableNumbers',
+      name: 'game-table',
+      component: Game,
+      props: true
+    },
+    {
       path: '/score',
       name: 'score',
       component: Score
