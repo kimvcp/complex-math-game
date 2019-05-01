@@ -10,6 +10,13 @@
             <h4>Incorrect : {{numIncorrect}}</h4>
             <h4>Total : {{numTotal}}</h4>
           </div>
+
+          <div
+            v-for=" (question,index) in resultQuestions"
+              v-bind:key="index"
+          > 
+            {{index}} : {{question}} 
+          </div>
           <b-button class="mt-3" variant="info" block @click="goHome">Save the result</b-button>
         </b-modal>
     </div>
@@ -28,7 +35,8 @@ export default {
         'numCorrect',
         'numIncorrect',
         'numTotal',
-        'tableNumber'
+        'tableNumber',
+        'resultQuestions'
         ],
     // attributes of the class
     data() {
@@ -37,7 +45,7 @@ export default {
       currentTimer: 60,
       ticker: undefined,
       laps: [],
-      highScore: "",
+      highScore: [],
       latestLap: "",
       snackbar: false,
     };
@@ -76,18 +84,17 @@ export default {
             this.stop()
             this.toggleModal()
       }
-      }, 10);
+      }, 100);
     }, 
     // Country roads take me home.. to the place I belong
     goHome() {
       this.$router.push('/') 
     },
-    // We pass the ID of the button that we want to return focus to
-    // when the modal has hidden
+
+    // update the high score if possible
     toggleModal() {
       this.$refs['my-modal'].toggle('#toggle-btn')
-
-      const preHighScore = Object.values(this.highScore)[2]
+      const preHighScore = JSON.parse(JSON.stringify(this.highScore))[0].highscore
       if(this.numCorrect > preHighScore){
         APIService.postHighScore(this.tableNumber,this.numCorrect)
       }

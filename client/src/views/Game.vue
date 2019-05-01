@@ -5,6 +5,7 @@
       v-bind:numIncorrect="numIncorrect"
       v-bind:numTotal="numTotal"
       v-bind:tableNumber="tableNumber"
+      v-bind:resultQuestions="resultQuestions"
       />
       <QuestionBox
         v-if="questions.length"
@@ -55,7 +56,7 @@ export default {
           this.numIncorrect++;
         }
         this.numTotal++;
-        this.resultQuestions[this.index] = this.questions[this. index]
+        this.resultQuestions[this.index] = this.questions[this.index]
       },
     },
 
