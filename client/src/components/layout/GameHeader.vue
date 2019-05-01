@@ -6,11 +6,11 @@
         />
         <b-modal ref="my-modal" hide-footer centered title="You have run out of time!">
           <div class="d-block text-center">
-            <h4 style="color: green">Correct : {{ numCorrect }}</h4>
-            <h4 style="color: red">Incorrect : {{numIncorrect}}</h4>
-            <h4 style="color: blue">Total : {{numTotal}}</h4>
+            <h4>Correct : {{numCorrect}}</h4>
+            <h4>Incorrect : {{numIncorrect}}</h4>
+            <h4>Total : {{numTotal}}</h4>
           </div>
-          <b-button class="mt-3" variant="default" block @click="goHome">Go back</b-button>
+          <b-button class="mt-3" variant="info" block @click="goHome">Go back</b-button>
         </b-modal>
     </div>
 </template>
@@ -73,7 +73,7 @@ export default {
             this.stop()
             this.toggleModal()
       }
-      }, 1000);
+      }, 10);
     }, 
     // Country roads take me home.. to the place I belong
     goHome() {

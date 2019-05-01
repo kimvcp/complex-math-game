@@ -10,7 +10,7 @@ class PostService{
     static getMultiplication(index){
         return new Promise(async (resolve,reject) => {
             try{
-                const res = await axios.get( multUrl + "playing/" + index +"/");
+                const res = await axios.get( multUrl + index +"/");
                 const data = lodash.shuffle(res.data);
                 resolve(
                     data.map(element => ({

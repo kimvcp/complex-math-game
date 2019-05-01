@@ -2,9 +2,11 @@
     <b-button 
         variant="light" 
         :to="`/game/${tableNumbers}`"
-    >
-        <span style="margin-right: 90px"> Multiplication Table: <b>{{tableNumbers}}</b></span>
+    >   
+    <h5>
+        <span style="margin-right: 90px">Multiplication Table: <b>{{tableNumbers}}</b></span>
         <span>High Score: {{scores.highscore}} </span>
+    </h5>
     </b-button > 
 </template>
 
