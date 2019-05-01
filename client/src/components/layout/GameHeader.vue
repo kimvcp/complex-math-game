@@ -10,13 +10,14 @@
             <h4>Incorrect : {{numIncorrect}}</h4>
             <h4>Total : {{numTotal}}</h4>
           </div>
-          <b-button class="mt-3" variant="info" block @click="goHome">Go back</b-button>
+          <b-button class="mt-3" variant="info" block @click="goHome">Save the result</b-button>
         </b-modal>
     </div>
 </template>
 
 <script>
 import Timer from "./Timer.vue";
+import APIService from "../../APIService";
 export default {
     name: "GameHeader",
     components: {
@@ -26,7 +27,8 @@ export default {
      props: [   
         'numCorrect',
         'numIncorrect',
-        'numTotal'
+        'numTotal',
+        'tableNumber'
         ],
     // attributes of the class
     data() {
@@ -35,6 +37,7 @@ export default {
       currentTimer: 60,
       ticker: undefined,
       laps: [],
+      highScore: "",
       latestLap: "",
       snackbar: false,
     };
@@ -83,12 +86,22 @@ export default {
     // when the modal has hidden
     toggleModal() {
       this.$refs['my-modal'].toggle('#toggle-btn')
+
+      const preHighScore = Object.values(this.highScore)[2]
+      if(this.numCorrect > preHighScore){
+        APIService.postHighScore(this.tableNumber,this.numCorrect)
+      }
     }
   },
   // called at the time the page created
-  created() {
+  async created() {
     this.start()
-  },
+    try {
+        this.highScore = await APIService.getHighScore(this.tableNumber);
+      } catch (err) {
+        this.err = err.message;
+      }
+    },
 };
 
 </script>

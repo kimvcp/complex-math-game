@@ -4,11 +4,8 @@ module.exports = {
   outputDir : path.resolve(__dirname,'../server/public'),
   devServer: {
     proxy: {
-      "/api": {
+      "/api/game": {
         target: "http://localhost:5000"
-      },
-      "/backend": {
-         target: "http://localhost:5000"
       }
     }
   }

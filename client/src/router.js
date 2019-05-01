@@ -25,7 +25,7 @@ export default new Router({
       props: true
     },
     {
-      path: '/game/:tableNumbers',
+      path: '/game/:tableNumber',
       name: 'game-table',
       component: Game,
       props: true

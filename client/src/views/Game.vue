@@ -4,6 +4,7 @@
       v-bind:numCorrect="numCorrect"
       v-bind:numIncorrect="numIncorrect"
       v-bind:numTotal="numTotal"
+      v-bind:tableNumber="tableNumber"
       />
       <QuestionBox
         v-if="questions.length"
@@ -17,7 +18,7 @@
 
 import GameHeader from "../components/layout/GameHeader"
 import QuestionBox from "../components/QuestionBox"
-import PostService from "../PostService";
+import APIService from "../APIService";
 
 export default {
     name: "Game",
@@ -27,12 +28,13 @@ export default {
     },
     // props pass by the parent
     props: [
-      "tableNumbers",
+      "tableNumber",
     ],
     //attributes of the class
     data(){
       return{
         questions: [],
+        resultQuestions: [],
         index: 0,
         numCorrect: 0,
         numIncorrect: 0,
@@ -53,13 +55,14 @@ export default {
           this.numIncorrect++;
         }
         this.numTotal++;
+        this.resultQuestions[this.index] = this.questions[this. index]
       },
     },
 
-    // get the api at the time page start
+    // get the api at the time page starts
     async created() {
       try {
-        this.questions = await PostService.getMultiplication(this.tableNumbers);
+        this.questions = await APIService.getMultiplication(this.tableNumber);
       } catch (err) {
         this.err = err.message;
       }

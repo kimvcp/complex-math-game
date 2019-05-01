@@ -20,7 +20,7 @@
 
 <script>
 import Table from '../components/Table';
-import PostService from "../PostService";
+import APIService from "../APIService";
 
 export default {
   name: 'Home',
@@ -40,7 +40,7 @@ export default {
     // get the api at the time page start
     async created() {
       try {
-        this.scores = await PostService.getAllHighScore();
+        this.scores = await APIService.getAllHighScore();
       } catch (err) {
         this.err = err.message;
       }

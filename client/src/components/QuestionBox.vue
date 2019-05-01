@@ -37,14 +37,6 @@ export default {
             answered: false
         }
     },
-    // get the answer from the api
-    computed: {
-        answers () {
-            let answers = [...this.currentQuestion.incorrect_answers];
-            answers.push(this.currentQuestion.correct_answer);
-            return answers
-        }
-    },
     // everytime the question updates
     watch:{
         currentQuestion: {
