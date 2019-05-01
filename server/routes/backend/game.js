@@ -31,7 +31,7 @@ router.get("/highscore/:number/", async (req, res) => {
 });
 
 //Update highscore.
-// /api/game/new/highscore/<multiplication-number>
+// /api/game/highscore/<multiplication-number>
 router.post("/highscore/:number/:highscore/", async (req, res) => {
   const db = await loadScore();
   res.send(
