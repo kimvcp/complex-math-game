@@ -1,62 +1,56 @@
-var express = require('express');
-var mongodb = require('mongodb');
+require("dotenv").config();
+var express = require("express");
+var mongodb = require("mongodb");
 var router = express.Router();
 
-var player = require('./player.js');
-var play = require('./play.js');
+var player = require("./player.js");
+var play = require("./play.js");
 
-
-
-//localhost:5000/backend/:id/
-router.get('/:id/', function(req, res, next) {
+//Get the multiplication.
+// /api/game/play/<multiplication-number>
+router.get("/play/:number/", function(req, res, next) {
   var body = req.body;
-
-  console.log(body)
-
   var pl = new player("user", 0);
-  console.log(pl)
-  var game = new play("playing", req.params.id, pl);
+  var game = new play("playing", req.params.number, pl);
   res.send(game.sent());
 });
 
-
-
-//localhost:5000/backend/
-router.get('/', async (req, res) => {
-  const posts = await loadScore();
-  res.send(await posts.find({}).toArray());
-});
-
-
-
-//localhost:5000/backend/:id/:hishscore
-router.get('/:id/:highscore/', async (req, res) => {
+//Get highscore.
+// /api/game/highscore/<multiplication-number>
+router.get("/highscore/:number/", async (req, res) => {
   const db = await loadScore();
-  var data = (await db.find({"number": parseInt(req.params.id)}).toArray());
-
-  if(parseInt(req.params.highscore) > data[0]['highscore']){
-
-    res.send(await db.updateOne(
-      { number: parseInt(req.params.id) },
-      { 
-         $set: {highscore: parseInt(req.params.highscore)}
-      }
-    ))
-  } else res.send(data);
-
+  var data = await db.find({ number: parseInt(req.params.number) }).toArray();
+  res.send(data);
 });
 
+//Update highscore.
+// /api/game/new/highscore/<multiplication-number>
+router.post("/highscore/:number/:highscore/", async (req, res) => {
+  const db = await loadScore();
+  res.send(
+    await db.updateOne(
+      { number: parseInt(req.params.number) },
+      {
+        $set: { highscore: parseInt(req.params.highscore) }
+      }
+    )
+  );
+});
 
+//Open connection with the database, function returns client for further interaction.
 async function loadScore() {
   const client = await mongodb.MongoClient.connect(
-    'mongodb+srv://jamp:1234@expresscluster-ndwly.mongodb.net/test?retryWrites=true',
+    "mongodb+srv://" +
+      process.env.DB_USER +
+      ":" +
+      process.env.DB_PASS +
+      process.env.DB_URL,
     {
       useNewUrlParser: true
     }
   );
 
-  return client.db('express').collection('highscore');
+  return client.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION);
 }
-
 
 module.exports = router;
