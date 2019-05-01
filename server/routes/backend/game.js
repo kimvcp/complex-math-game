@@ -6,6 +6,13 @@ var router = express.Router();
 var player = require("./player.js");
 var play = require("./play.js");
 
+//Get all highscores.
+// /api/game/highscores/
+router.get('/highscores/', async (req, res) => {
+  const posts = await loadScore();
+  res.send(await posts.find({}).toArray());
+});
+
 //Get the multiplication.
 // /api/game/play/<multiplication-number>
 router.get("/play/:number/", function(req, res, next) {
