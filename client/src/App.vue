@@ -1,25 +1,17 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Timer
-      :timer="formattedTime"
-      :state="timerState"
-      @start="start"
-      @lap="lap"
-      @pause="pause"
-      @stop="stop"
-    />
-    <PostComponent/>
-  </div>
+  <v-app>
+    <v-content>
+      <Timer :timer="formattedTime" :state="timerState" @start="start" @lap="lap" @pause="pause" @stop="stop"/>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import PostComponent from "./components/PostComponent.vue";
+// import PostComponent from "./components/PostComponent.vue";
 import Timer from "./components/Timer.vue";
 export default {
   name: "app",
   components: {
-    PostComponent,
     Timer
   },
   data() {
@@ -46,7 +38,7 @@ export default {
         formattedTime: this.formatTime(this.currentTimer)
       }),
         (this.latestLap = this.formatTime(this.currentTimer));
-      console.log(this.latestLap);
+        console.log(this.latestLap);
     },
     pause() {
       window.clearInterval(this.ticker);
