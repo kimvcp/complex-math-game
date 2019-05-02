@@ -1,25 +1,37 @@
 require("dotenv").config();
+
+const QuestionMaker = require("../backend/QuestionMaker.js");
+const NormalQuestion = require("../backend/NormalQuestion.js");
+const AdvanceQuestion = require("../backend/AdvanceQuestion.js");
+
 var express = require("express");
 var mongodb = require("mongodb");
 var router = express.Router();
 
-var player = require("./player.js");
-var play = require("./play.js");
+
+let questionMaker = new QuestionMaker();
 
 //Get all highscores.
 // /api/game/highscores/
-router.get('/highscores/', async (req, res) => {
+router.get("/highscores/", async (req, res) => {
   const posts = await loadScore();
   res.send(await posts.find({}).toArray());
 });
 
 //Get the multiplication.
 // /api/game/play/<multiplication-number>
-router.get("/play/:number/", function(req, res, next) {
-  var body = req.body;
-  var pl = new player("user", 0);
-  var game = new play("playing", req.params.number, pl);
-  res.send(game.sent());
+router.get("/play/:number/", function(req, res) {
+  questionMaker.setStrategy(new NormalQuestion());
+  var data = questionMaker.create(req.params.number);
+  res.send(data);
+});
+
+//Get the advance multiplication.
+// /api/game/play/advance
+router.get("/play/:number/advance/", function(req, res) {
+  questionMaker.setStrategy(new AdvanceQuestion());
+  var data = questionMaker.create(req.params.number);
+  res.send(data);
 });
 
 //Get highscore.
