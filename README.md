@@ -58,7 +58,7 @@ If not then use the local link above.
 
 ## UML diagram
 
-![imagePdf](server/public/img/uml_diagram.pdf)
+[imagePdf](server/public/img/uml_diagram.pdf)
 
 ## GRASP document
 
