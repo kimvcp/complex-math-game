@@ -3,8 +3,8 @@ var express = require("express");
 var mongodb = require("mongodb");
 var router = express.Router();
 
-var player = require("./player.js");
-var play = require("./play.js");
+var player = require("../backend/player.js");
+var play = require("../backend/play.js");
 
 //Get all highscores.
 // /api/game/highscores/
@@ -18,7 +18,7 @@ router.get("/highscores/", async (req, res) => {
 router.get("/play/:number/", function(req, res, next) {
   var body = req.body;
   var pl = new player("user", 0);
-  var game = new play("playing", req.params.number, pl);
+  var game = new play(req.params.number, pl);
   res.send(game.sent());
 });
 

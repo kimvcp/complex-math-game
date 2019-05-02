@@ -1,9 +1,8 @@
-
-//{name: jamp, number:2, score: 10, status: playing}
+//class for manage the game
 
 class Play{
-    constructor(status, number, player){
-        this.status = status;
+    constructor(number, player){
+
         this.number = number;
         this.player = player;
     }
