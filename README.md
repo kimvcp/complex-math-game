@@ -58,7 +58,7 @@ If not then use the local link above.
 
 ## UML diagram
 
-<a><img src="server/public/img/uml_diagram.pdf"></a>
+<img src="server/public/img/uml_diagram-page-001.jpg">
 
 ## GRASP document
 
@@ -73,9 +73,55 @@ If not then use the local link above.
 
 > 4. Controller 
 - A single Vue file consist of html, javascript, and css. Which means that each Vue file has the controller in itself written in javascript.
+```
+example for Controller by Vue structure.
+
+<template>
+   <p> {{ greeting }} world! </p>
+</template>
+
+<script>
+   module.exports = {
+       data: function() {
+           retutn {
+               greeting: 'Hello'
+           }
+       }       
+   }
+</script>
+
+<style scoped>
+   p {
+      front-size: 2em;
+      text-align: center;
+   }
+</style>
+
+```
 
 > 5. Polymorphism 
 - QuestionMaker morphs when it strategy is set to something new. This means that the method this.strategy.create() can be execute without knowing it actucl form yet.
+
+``` 
+example for polymorghism.
+
+class QuestionMaker {
+  constructor() {
+    this.strategy = "";
+  }
+
+  setStrategy(strategy) {
+    this.strategy = strategy;
+  }
+
+  //create questions with the current strategy
+  create(number) {
+    return this.strategy.create(number);
+  }
+}
+
+
+```
 
 
 ## Technology
