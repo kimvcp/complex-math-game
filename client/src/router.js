@@ -3,7 +3,6 @@ import BootstrapVue from 'bootstrap-vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Game from './views/Game.vue';
-import Score from './views/Score.vue';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -30,10 +29,6 @@ export default new Router({
       component: Game,
       props: true
     },
-    {
-      path: '/score',
-      name: 'score',
-      component: Score
-    }
+    
   ]
 })

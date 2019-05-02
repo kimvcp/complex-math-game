@@ -5,25 +5,27 @@
             :state="timerState"
         />
         <b-modal ref="my-modal" hide-footer centered title="You have run out of time!">
-          <div class="d-block text-center">
-            <h4>Correct : {{numCorrect}}</h4>
-            <h4>Incorrect : {{numIncorrect}}</h4>
-            <h4>Total : {{numTotal}}</h4>
-          </div>
-
-          <div
-            v-for=" (question,index) in resultQuestions"
+           <template slot="modal-header" class="d-block center;"> 
+              <h4>Correct : {{numCorrect}}</h4>
+              <h4>Incorrect : {{numIncorrect}}</h4>
+              <h4>Total : {{numTotal}}</h4><br>
+          </template>
+          <template>
+            <div
+              v-for=" (question,index) in resultQuestions"
               v-bind:key="index"
-          > 
-            {{index}} : {{question}} 
-          </div>
-          <b-button class="mt-3" variant="info" block @click="goHome">Save the result</b-button>
+              class="center"
+             > 
+            Question {{index+1}}: {{question.question}}
+            </div>
+        </template>
+          <b-button class="mt-3" variant="info" size="lg" block @click="goHome">Save the result</b-button>
         </b-modal>
     </div>
 </template>
 
 <script>
-import Timer from "./Timer.vue";
+import Timer from "../Timer.vue";
 import APIService from "../../APIService";
 export default {
     name: "GameHeader",
@@ -62,7 +64,7 @@ export default {
     // mark the current
     lap() {
       this.laps.push({
-        seconds: this.currentTimer,
+        seconds: this.currentTimer
       })
     },
     // pause the timer
@@ -84,7 +86,7 @@ export default {
             this.stop()
             this.toggleModal()
       }
-      }, 100);
+      }, 50);
     }, 
     // Country roads take me home.. to the place I belong
     goHome() {
@@ -120,5 +122,10 @@ export default {
         color: gray;
         padding: 15px;
     }
+    .center { 
+      border: 2px solid lightgray;
+      padding: 5px;
+      margin: 10px
+}
 </style>
 

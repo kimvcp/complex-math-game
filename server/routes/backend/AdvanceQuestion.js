@@ -16,7 +16,7 @@ class AdvanceQuestion {
         var tempQuestion = {
           question: question,
           correct_answer: answer,
-          incorrect_answer: [choice1, choice2, choice3]
+          incorrect_answers: [choice1, choice2, choice3]
         };
         questions.push(tempQuestion);
       }
