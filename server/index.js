@@ -8,9 +8,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const posts = require('./routes/api/posts')
+const game = require('./routes/api/GameAPI')
 
-app.use('/api/posts',posts)
+app.use('/api/game', game)
+
 
 //Handle production
 if(process.env.NODE_ENV === 'production'){
