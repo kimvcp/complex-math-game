@@ -8,7 +8,7 @@ var play = require("./play.js");
 
 //Get all highscores.
 // /api/game/highscores/
-router.get('/highscores/', async (req, res) => {
+router.get("/highscores/", async (req, res) => {
   const posts = await loadScore();
   res.send(await posts.find({}).toArray());
 });
