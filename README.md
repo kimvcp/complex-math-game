@@ -56,24 +56,33 @@ To create a production build, run npm run build.
 The website should open automatically.
 If not then use the local link above.
 
+## UML diagram
+
+![Alt text](server/public/img/uml_diagram.pdf)
+
 ## GRASP document
 
-> 1. High cohesion - QuestionMaker have an attribute called strategy, and the class is extend by NormalQuestion and AdvanceQuestion.  Both the superclass and subclass should be close to each other. So we strive for high cohesion and bind all related code together as close as possible.
+> 1. High cohesion 
+- QuestionMaker have an attribute called strategy, and the class is extend by NormalQuestion and AdvanceQuestion.  Both the superclass and subclass should be close to each other. So we strive for high cohesion and bind all related code together as close as possible.
 
-> 2. Low Coupling - QuestionMaker is make to loose coupling between the sub question and the API. If there's no QuestionMaker,the GameAPI will depends too much on those sub class and it will be hard to make improvements in future. 
+> 2. Low Coupling 
+- QuestionMaker is make to loose coupling between the sub question and the API. If there's no QuestionMaker,the GameAPI will depends too much on those sub class and it will be hard to make improvements in future. 
 
-> 3. Indirection - GameAPI looses coupling between model and view directly. It acts like a mediator, view does not get object from model directly but through requests by get APIs. Moreover, view does not access the database directly. Any actions must be done by requests in GameAPI.
+> 3. Indirection 
+- GameAPI looses coupling between model and view directly. It acts like a mediator, view does not get object from model directly but through requests by get APIs. Moreover, view does not access the database directly. Any actions must be done by requests in GameAPI.
 
-> 4. Controller - A single Vue file consist of html, javascript, and css. Which means that each Vue file has the controller in itself written in javascript.
+> 4. Controller 
+- A single Vue file consist of html, javascript, and css. Which means that each Vue file has the controller in itself written in javascript.
 
-> 5. Polymorphism - QuestionMaker morphs when it strategy is set to something new. This means that the method this.strategy.create() can be execute without knowing it actucl form yet.
+> 5. Polymorphism 
+- QuestionMaker morphs when it strategy is set to something new. This means that the method this.strategy.create() can be execute without knowing it actucl form yet.
 
 
 ## Technology
 
 - Backend : ``` Express.js```
 - Frontend : ``` Vue.js ```
-- Database : ``` Mongodb ```
+- Database : ``` MongoDB```
 - Deploy with : ``` Heroku ```
 
 ## Team Members
