@@ -58,7 +58,7 @@ If not then use the local link above.
 
 ## UML diagram
 
-<img src="server/public/img/uml_diagram-page-001.jpg">
+<img src="server/public/img/uml_diagram.jpg">
 
 ## GRASP document
 
