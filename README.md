@@ -58,11 +58,7 @@ If not then use the local link above.
 
 ## UML diagram
 
-<<<<<<< HEAD
 <img src="server/public/img/uml_diagram-page-001.jpg">
-=======
-[imagePdf](server/public/img/uml_diagram.pdf)
->>>>>>> 1530104f2e520048e08d0c73ddc97d55b3f14bd8
 
 ## GRASP document
 
